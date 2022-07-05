@@ -5,7 +5,9 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      'botton-color': '#18D860'
+    },
   },
   plugins: [],
 }
