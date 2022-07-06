@@ -9,5 +9,7 @@ module.exports = {
       'botton-color': '#18D860'
     },
   },
-  plugins: [],
+  plugins: [
+    require("tailwind-scrollbar-hide")
+  ],
 }
