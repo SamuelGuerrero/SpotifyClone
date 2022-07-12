@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { getSession } from "next-auth/react";
 import Center from "../components/Center";
 import Sidebar from "../components/Sidebar";
+import Player from "../components/Player"
 
 const Home: NextPage = () => {
   return (
@@ -9,9 +10,10 @@ const Home: NextPage = () => {
       <main className="flex ">
         <Sidebar />
         <Center />
-        {/* Center */}
       </main>
-      <div>{/* Player */}</div>
+      <div className="sticky bottom-0">
+        <Player/>
+      </div>
     </div>
   );
 };

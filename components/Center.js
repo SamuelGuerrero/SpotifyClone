@@ -1,7 +1,7 @@
 import { ChevronDownIcon } from "@heroicons/react/outline";
-import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { shuffle } from "lodash";
+import { signOut, useSession } from "next-auth/react";
 
 import { playlistIdState, playlistState } from "../atoms/playlistAtom";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -25,6 +25,8 @@ function Center() {
   const playlistId = useRecoilValue(playlistIdState);
   const [playlist, setPlaylist] = useRecoilState(playlistState);
 
+  console.log("id->",playlistId)
+
   useEffect(() => {
     setColor(shuffle(colors).pop());
   }, [playlistId]);
@@ -35,6 +37,7 @@ function Center() {
       spotifyApi
         .getPlaylist(playlistId)
         .then((data) => {
+          //console.log("->>>",data.body)
           setPlaylist(data.body);
         })
         .catch((error) => console.log("Something went wrong!", error));
@@ -44,9 +47,9 @@ function Center() {
   console.log(playlist);
 
   return (
-    <div className="flex-grow text-white">
+    <div className="flex-grow h-screen overflow-y-scroll text-white">
       <header className="absolute top-5 right-8">
-        <div className="flex cursor-pointer items-center space-x-3 rounded-full bg-red-300 p-1 pr-2 opacity-90 hover:opacity-80">
+        <div className="flex cursor-pointer items-center space-x-3 rounded-full bg-red-300 p-1 pr-2 opacity-90 hover:opacity-80" onClick={signOut}>
           <img
             className="h-10 w-10 rounded-full"
             src={session?.user?.image}
@@ -74,7 +77,8 @@ function Center() {
       </section>
 
       <div>
-        <Songs/>
+        
+        <Songs />
       </div>
     </div>
   );
